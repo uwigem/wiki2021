@@ -1,6 +1,6 @@
 export type ContentSingularData = {
     plainText_content?: string
-    exampleImage_imageLink?: string
-    exampleImage_percentageSize?: number
+    list?: string[]
+    completed?: string[]
     [idx: string]: any
 }
