@@ -1,0 +1,7 @@
+.completedListItem {
+    color: greenyellow;
+}
+
+.toDoList {
+    list-style-type: circle;
+}
