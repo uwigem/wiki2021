@@ -9,13 +9,13 @@ import { ContentSingularData } from "../../_data/ContentSingularData";
  * June 28, 2019
 **/
 export const ToDoList: React.FC<ContentSingularData> = ({
-    list
+    toDoList
 }) => {
-    if (!list) {
+    if (!toDoList) {
         return <></>
     }
 
-    let items = list.map((item) => {
+    let items = toDoList.map((item) => {
         return <li>{item}</li>;
     })
 

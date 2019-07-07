@@ -1,6 +1,5 @@
 export type ContentSingularData = {
     plainText_content?: string
-    list?: string[]
-    completed?: string[]
+    toDoList?: String[]
     [idx: string]: any
 }
