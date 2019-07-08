@@ -16,7 +16,7 @@ export const ToDoList: React.FC<ContentSingularData> = ({
     }
 
     let items = toDoList.map((item) => {
-        return <li>{item}</li>;
+        return <li key={item.index}>{item.task}</li>;
     })
 
     return <ul>{items}</ul>
