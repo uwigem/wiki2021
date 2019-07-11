@@ -1,5 +1,9 @@
+import { ToDoListItem } from '../ContentWidgets/ToDoList/ToDoList';
+
 export type ContentSingularData = {
     plainText_content?: string
-    toDoList?: {index?: number, task?: string}[]
+    exampleImage_imageLink?: string
+    exampleImage_percentageSize?: number
+    toDoList_content?: ToDoListItem[]
     [idx: string]: any
 }
