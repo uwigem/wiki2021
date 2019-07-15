@@ -1,0 +1,33 @@
+.tabs-container {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    padding: 1rem;
+    background-color: #420DAB;
+    color: #ffffff;
+}
+
+.tab:hover {
+    color: #DAB420;
+    cursor: pointer;
+}
+
+.current-tab {
+    color: #DAB420;
+    border-bottom: 1px #DAB420 solid;
+}
+
+.tab-order-btn {
+
+}
+
+.remove-tab-btn {
+    margin-left: 5px;
+    color: red;
+    background-color: transparent;
+    border: none;
+}
+
+.remove-tab-btn:hover {
+    cursor: pointer;
+}
