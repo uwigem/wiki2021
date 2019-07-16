@@ -1,6 +1,7 @@
 .tabs-container {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     list-style-type: none;
     padding: 1rem;
     background-color: #420DAB;
@@ -17,8 +18,57 @@
     border-bottom: 1px #DAB420 solid;
 }
 
-.tab-order-btn {
+.current-tab-content, .current-tab-content-editor {
+    width: 100%;
+    border: 1px black solid;
+    margin-bottom: 5px;
+}
 
+.current-tab-content {
+    height: 15rem;
+    overflow: scroll;
+    padding: 3rem;
+    padding-top: 1rem;
+}
+
+.current-tab-content-editor {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.current-tab-content-editor > textarea, .current-tab-content > ReactMarkdown {
+    width: 90%;
+    height: 5rem;
+}
+
+.add-tab-btn {
+    padding: 5px;
+    color: #ffffff;
+    background-color: #420DAB;
+    align-self: flex-end;
+}
+
+.tab-label-input {
+    padding: 3px;
+    background-color: #420DAB;
+    color: #ffffff;
+    border: 1px #ffffff solid;
+    border-left: none;
+    border-right: none;
+}
+
+.tab-control-btn {
+    padding: 3px;
+    background-color: #420DAB;
+    color: #ffffff;
+    border-radius: 0px;
+}
+
+.tab-control-btn:hover {
+    background-color: #ffffff;
+    color: #420DAB;
+    border-radius: 0px;
 }
 
 .remove-tab-btn {
@@ -30,4 +80,13 @@
 
 .remove-tab-btn:hover {
     cursor: pointer;
+}
+
+.tab-content-render-btn {
+    background-color: #420DAB;
+    color: #ffffff;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }

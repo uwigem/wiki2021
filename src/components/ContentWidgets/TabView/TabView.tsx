@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { ContentSingularData } from '../../_data/ContentSingularData';
 import './TabView.css';
+
+export type Tab = {
+    tabLabel: string
+    tabContent: string
+} 
 
 export const TabView: React.FC<ContentSingularData> = ({
     tabView_content
@@ -17,15 +23,15 @@ export const TabView: React.FC<ContentSingularData> = ({
         if (index == currentTab) {
             tabClassName += " current-tab";
         }
-        return <li className={tabClassName} onClick={() => setcurrentTab(index)}>{tab}</li>
+        return <li className={tabClassName} onClick={() => setcurrentTab(index)}>{tab.tabLabel}</li>
     });
 
     return <div>
         <ul className="tabs-container">
             {tabs}
         </ul>
-        <div>
-
+        <div className="current-tab-content">
+            <ReactMarkdown source={tabView_content[currentTab].tabContent} />
         </div>
     </div>;
 }
