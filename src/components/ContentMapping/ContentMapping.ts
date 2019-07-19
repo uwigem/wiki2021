@@ -7,6 +7,8 @@ import { ExampleImage } from '../ContentWidgets/ExampleImage/ExampleImage';
 import { ExampleImageEditor } from '../ContentWidgets/ExampleImage/ExampleImageEditor';
 import { ToDoList } from '../ContentWidgets/ToDoList/ToDoList';
 import { ToDoListEditor } from '../ContentWidgets/ToDoList/ToDoListEditor';
+import { Homepage } from '../ContentWidgets/Homepage/Homepage';
+import { HomepageEditor } from '../ContentWidgets/Homepage/HomepageEditor';
 
 export type WidgetEditorProps = {
     originalContent: ContentSingularData,
@@ -25,7 +27,8 @@ export enum WidgetTypes {
     PLAIN_TEXT = "PLAIN_TEXT",
     STUB = "STUB",
     EXAMPLE_IMAGE = "EXAMPLE_IMAGE",
-    TO_DO_LIST = "TO_DO_LIST"
+    TO_DO_LIST = "TO_DO_LIST",
+    HOMEPAGE = "HOMEPAGE"
 }
 
 export const ContentMapping: ContentMappingType = {
@@ -44,5 +47,9 @@ export const ContentMapping: ContentMappingType = {
     TO_DO_LIST: {
         widget: ToDoList,
         editor: ToDoListEditor
+    },
+    HOMEPAGE: {
+        widget: Homepage,
+        editor: HomepageEditor
     }
 }
