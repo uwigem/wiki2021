@@ -1,8 +1,6 @@
 import React, { FormEvent, ChangeEvent } from 'react';
 import { WidgetEditorProps } from '../../ContentMapping/ContentMapping';
-import { HomepageItem } from './Homepage'
 import './Homepage.css';
-import { url } from 'inspector';
 
 export const HomepageEditor: React.FC<WidgetEditorProps> = ({
     originalContent, 
@@ -23,14 +21,19 @@ export const HomepageEditor: React.FC<WidgetEditorProps> = ({
     }
 
     const updateBackgroundImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-        homepage_content.backgroundImage = "url(" + e.target.value + ")";
+        homepage_content.backgroundImage = e.target.value;
         setEditedContentOnChange("homepage_content", homepage_content);
     }
     
     return <>
-        <div className="outer"></div>
-        <h1>{homepage_content.title}</h1>
-        <h2>{homepage_content.subtitle}</h2>
+        <div className="bg-image-container">
+            <img className="bg-image" src={homepage_content.backgroundImage}/>
+            <section className="centered">
+                <h1>{homepage_content.title}</h1>
+                <h2>{homepage_content.subtitle}</h2>
+            </section>
+        </div>
+        
         
         
         <h3>Title</h3>
