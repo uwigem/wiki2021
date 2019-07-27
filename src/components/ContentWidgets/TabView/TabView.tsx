@@ -12,18 +12,15 @@ export const TabView: React.FC<ContentSingularData> = ({
     tabView_content
 }) => {
     
-    const [currentTab, setcurrentTab] = useState(0);
+    const [currentTab, setCurrentTab] = useState(0);
 
     if (!tabView_content) {
         return <></>
     }
     
     let tabs = tabView_content!!.map((tab, index) => {
-        let tabClassName = "tab";
-        if (index == currentTab) {
-            tabClassName += " current-tab";
-        }
-        return <li className={tabClassName} onClick={() => setcurrentTab(index)}>{tab.tabLabel}</li>
+        return <li key={tab.tabLabel + index} className={index == currentTab ? "tab-label current-tab" : "tab-label"} 
+            onClick={() => setCurrentTab(index)}>{tab.tabLabel}</li>
     });
 
     return <div>

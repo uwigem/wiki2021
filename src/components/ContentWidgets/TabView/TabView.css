@@ -8,7 +8,7 @@
     color: #ffffff;
 }
 
-.tab:hover {
+.tab-label:hover {
     color: #DAB420;
     cursor: pointer;
 }
@@ -37,7 +37,7 @@
     padding: 1rem;
 }
 
-.current-tab-content-editor > textarea, .current-tab-content > ReactMarkdown {
+.current-tab-content-editor > textarea, .current-tab-content > .react-markdown {
     width: 90%;
     height: 5rem;
 }
