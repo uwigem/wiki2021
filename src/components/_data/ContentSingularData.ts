@@ -1,5 +1,6 @@
 
 import { Tab } from '../ContentWidgets/TabView/TabView';
+import { WidgetTypes } from '../ContentMapping/ContentMapping';
 
 export type ContentSingularData = {
     plainText_content?: string
