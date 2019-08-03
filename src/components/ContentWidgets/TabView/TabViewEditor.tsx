@@ -64,12 +64,12 @@ export const TabViewEditor: React.FC<WidgetEditorProps> = ({
             setCurrentTab(index);
         }
 
-        return <li key={tab.tabLabel + index}>
+        return <li key={tab.tabLabel + index} id={tab.tabLabel + index}>
             <button className="tab-control-btn" onClick={showContent}>Content</button>
             <input className="tab-label-input" type="text" value={tab.tabLabel} onChange={onTabNameChange}/>
-            <button className="tab-control-btn" 
+            <button className="tab-control-btn tab-control-btn-left" 
                     onClick={() => moveTab(0, index - 1)}>←</button>
-            <button className="tab-control-btn"
+            <button className="tab-control-btn tab-control-btn-right"
                     onClick={() => moveTab(copyTabViewContent.length - 1, index + 1)}>→</button>
             <button className="remove-tab-btn" onClick={removeTab}>X</button>
         </li>

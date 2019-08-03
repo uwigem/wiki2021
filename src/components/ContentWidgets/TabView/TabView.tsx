@@ -14,7 +14,7 @@ export const TabView: React.FC<ContentSingularData> = ({
     
     const [currentTab, setCurrentTab] = useState(0);
 
-    if (!tabView_content) {
+    if (!tabView_content || tabView_content.length == 0) {
         return <></>
     }
     
@@ -28,7 +28,7 @@ export const TabView: React.FC<ContentSingularData> = ({
             {tabs}
         </ul>
         <div className="current-tab-content">
-            <ReactMarkdown source={tabView_content[currentTab].tabContent} />
+            <ReactMarkdown className="react-markdown" source={tabView_content[currentTab].tabContent} />
         </div>
     </div>;
 }
