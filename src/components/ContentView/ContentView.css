@@ -1,0 +1,27 @@
+.sidebar-content-view {
+    display: flex;
+    justify-content: space-between;
+    padding: 5rem;
+}
+
+.sidebar-content-view #content-view-container {
+    justify-self: center;
+    align-self: center;
+    flex-grow: 1;
+}
+
+#sidebar {
+    list-style: none;
+    margin-right: 10rem;
+    position: sticky;
+    top: 15%;
+    height: 100px;
+}
+
+#sidebar li {
+    margin-bottom: 5px;
+}
+
+.active-section {
+    font-weight: bold;
+}

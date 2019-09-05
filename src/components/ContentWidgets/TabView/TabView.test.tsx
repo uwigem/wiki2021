@@ -104,6 +104,8 @@ describe("TabViewEditor component", () => {
             editedContent={editedContent}
             setEditedContentOnChange={setEditedContentOnChange} />);
         wrapper.find(".remove-tab-btn").first().simulate("click");
+
+        // expect(setEditedContentOnChange).toBeCalledWith("_abc", {}); 
         expect(originalContent.tabView_content.length).toEqual(2);
         expect(originalContent.tabView_content[0].tabLabel).toEqual("Tab2");
     });

@@ -27,7 +27,7 @@ type AppProps = {
     firebase?: any,
     ContentEditor: React.FC<ContentEditorProps>
 }
-const debugURL = "/Editor";
+const debugURL = "/SidebarTest";
 
 /**
  * App is the main application that handles all the route logic and rendering.
@@ -143,6 +143,8 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
             setLoading(false);
         }, 3000);
     }
+
+    console.log(contentData)
 
     return <div className="App">
         <EnvironmentContext.Provider value={{ windowWidth, firebase }}>

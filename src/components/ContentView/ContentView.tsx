@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ContentData } from '../_data/Data';
 import { ContentMapping } from '../../components/ContentMapping/ContentMapping';
 import equal from 'deep-equal';
+import './ContentView.css';
+import { SideBar } from '../ContentWidgets/SideBar/SideBar';
 
 
 export type ContentViewProps = {
@@ -18,7 +20,7 @@ export type ContentViewProps = {
  */
 export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle }) => {
     const [content, setContent] = useState<ContentData>({ ...contentData } as ContentData);
-
+    
     useEffect(() => {
         if (!equal(content, contentData)) {
             setContent({ ...contentData } as ContentData)
@@ -32,19 +34,39 @@ export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle
         return <></>
     }
 
+    let options = {
+        root: document.querySelector('#scrollArea'),
+        rootMargin: '0px',
+        threshold: 0.01
+      };
+    let observerCallback = (entries, observer) => {
+        entries.forEach((entry) => {
+            entry.boundingClientRect
+        });
+    }
+    let observer = new IntersectionObserver(observerCallback, options);
+
     return <>
-        {/** TODO: Add sidebar here if the page is a sidebar. */}
-        <div id="content-view-container">
-            {contentData[pageString].contentOrder &&
-                contentData[pageString].content &&
-                contentData[pageString].contentOrder!.map((contentHash) => {
-                    let content = contentData[pageString].content![contentHash];
-                    let ContentWidget = ContentMapping[content!.type].widget;
-                    return <div id={contentHash} key={contentHash}>
-                        <ContentWidget {...content} />
-                    </div>
-                })
+        <div className={contentData[pageString].hasSidebar ? "sidebar-content-view" : ""}>
+            {/** TODO: Add sidebar here if the page is a sidebar. */
+            contentData[pageString].hasSidebar ? 
+                <SideBar contentData={contentData} pageTitle={pageString} />
+            
+            : null
             }
+            
+            <div id="content-view-container">
+                {contentData[pageString].contentOrder &&
+                    contentData[pageString].content &&
+                    contentData[pageString].contentOrder!.map((contentHash) => {
+                        let content = contentData[pageString].content![contentHash];
+                        let ContentWidget = ContentMapping[content!.type].widget;
+                        return <div id={contentHash} key={contentHash}>
+                            <ContentWidget {...content} />
+                        </div>
+                    })
+                }
+            </div>
         </div>
     </>
 }

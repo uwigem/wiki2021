@@ -40,11 +40,13 @@ export const ContentEditor: React.FC<ContentEditorProps> = ({ contentData, currY
     }
 
     if (!userLoading && contentData) {
+        console.log(contentData && pageToEdit ? contentData[pageToEdit] : null);
         return <>
             <ContentEditorBanner contentData={contentData}
                 pageToEdit={pageToEdit}
                 setPageToEdit={setPageToEdit}
                 currYear={currYear} />
+            {/* {contentData && pageToEdit ? <SideBar contentData={contentData} pageTitle={pageToEdit} /> : <></>} */}
             {(contentData &&
                 pageToEdit &&
                 contentData[pageToEdit]) ?
@@ -106,6 +108,7 @@ export const ContentEditor: React.FC<ContentEditorProps> = ({ contentData, currY
                     Please select a page to modify above
                 </>
             }
+            
         </>
     } else {
         return <>Loading</>
