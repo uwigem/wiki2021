@@ -4,7 +4,10 @@ import { ContentSingularData } from "../../_data/ContentSingularData";
 export type HomepageItem = {
     title: string,
     subtitle: string,
-    backgroundImage: string
+    backgroundImage: string,
+    blur: string,
+    bgLightness: string,
+    bgOpacity: string
 }
 
 /** 
@@ -23,12 +26,19 @@ export const Homepage: React.FC<ContentSingularData> = ({
 
     return (
         <>
-            <div className="bg-image-container">
-                <img className="bg-image" src={homepage_content.backgroundImage}/>
-                <section className="centered">
-                    <h1>{homepage_content.title}</h1>
-                    <h2>{homepage_content.subtitle}</h2>
-                </section>
+            <div style={{
+                backgroundImage: `url(${homepage_content.backgroundImage})`,
+                height: `100vh`,
+                backgroundPosition: `center`,
+                backgroundRepeat: `no-repeat`,
+                backgroundSize: `cover`,
+                backgroundColor: `hsla(0, 0% ,${homepage_content.bgLightness}%, ${homepage_content.bgOpacity})`,
+                filter: `blur(${homepage_content.blur}px)`,
+            }}>
+            </div>
+            <div style={{textAlign: `center`, transform: `translate(0, -400%)`}}>
+                <h1>{homepage_content.title}</h1>
+                <h2>{homepage_content.subtitle}</h2>
             </div>
         </>
     )
