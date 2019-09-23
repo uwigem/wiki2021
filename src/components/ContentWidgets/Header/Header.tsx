@@ -2,11 +2,11 @@ import React from 'react';
 import { ContentSingularData } from '../../_data/ContentSingularData';
 
 /**
- * PlainText is a plain text widget to act as an example widget
+ * Header is a header text widget
  * 
  * Last Modified
- * William Kwok
- * June 16, 2019
+ * Elisa Truong
+ * September 1, 2019
  */
 export const Header: React.FC<ContentSingularData> = ({ header_content, header_priority }) => {
     if (header_priority == 1) {

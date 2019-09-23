@@ -15,29 +15,6 @@ export const SideBar: React.FC<SideBarProps> = ({
     activeSection,
     activeSectionIndex
 }) => {
-    const [currentSection, setCurrentSection] = useState(contentData[pageTitle].contentOrder ? contentData[pageTitle].contentOrder!![0] : "");
-    const topOffSet = 200;
-    // useEffect(() => {
-        // const positions = contentData[pageTitle].contentOrder!!.map ((id) => {return document.getElementById(id)!!.getBoundingClientRect().top});
-
-        // const listener = (event: Event) => {
-        //     let min = 9999999;
-        //     let active = 0;
-        //     positions.forEach((position, index) => {
-                
-        //         if (position - window.scrollY < min) {
-        //             min = position;
-        //             active = index;
-        //         }
-        //     });
-        //     if (currentSection != contentData[pageTitle].contentOrder!![active]) {
-        //         setCurrentSection(contentData[pageTitle].contentOrder!![active]);
-        //     }
-        // }
-
-        // window.addEventListener('scroll', listener);
-        // return () => {window.removeEventListener('scroll', listener)};
-    // });
 
     if (!contentData && !pageTitle) {
         return <></>;
@@ -46,14 +23,7 @@ export const SideBar: React.FC<SideBarProps> = ({
     }
 
     const onClick = (event: React.MouseEvent) => {
-        let tar = event.currentTarget.id.split("-");
-        console.log(tar[0]);
-        console.log(document.getElementById(tar[0]))
-        console.log(document.getElementById(tar[0])!!.getBoundingClientRect());
-        let location = document.getElementById(tar[0])!!.getBoundingClientRect().top - 100;
-        // document.getElementById(tar[0])!!.scrollIntoView({behavior: 'smooth'});
-        // window.scrollBy(0, -50);
-        // console.log(location);
+        let location = document.getElementById(event.currentTarget.id.split("-")[0])!!.getBoundingClientRect().top - 100;
         window.scrollTo({ top: location, behavior: 'smooth' });
     }
 console.log(activeSectionIndex)

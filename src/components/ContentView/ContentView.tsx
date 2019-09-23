@@ -43,18 +43,6 @@ export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle
             };
 
             let observerCallback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-                // let entry = entries[0];
-                
-                // let sectionIndex = sections.indexOf(entry.target.id);
-                // if (entry.boundingClientRect.top <= 0) {
-
-                // }
-                // if (window.scrollY - prevscroll > 0) {
-                //     setActiveSection({section: entry.target.id, index: sectionIndex});
-                // } else {
-                //     setActiveSection({section: sections[sectionIndex - 1], index: sectionIndex - 1});
-                // }
-
                 let entry = entries[0];
                 let sectionIndex = sections.indexOf(entry.target.id);
                 if (entry.boundingClientRect.top <= 0) {
@@ -63,27 +51,8 @@ export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle
                     } else {
                         setActiveSection({section: sections[sectionIndex - 1], index: sectionIndex - 1, numSections: sections.length});
                     }
-                    console.log(prevscroll)
-                // } else if (activeSection.index - 1 == sectionIndex - 1) {
-                //         sectionIndex = sectionIndex - 1;
-                //         let section = sections[sectionIndex];
-                //         setActiveSection({section: section, index: sectionIndex});
-                //         console.log("trigger")
                 }
-                
                 prevscroll = window.scrollY;
-
-                // let min = 999999;
-                // let active = "";
-                // sections.forEach(section => {
-                //     let location = document.getElementById(section)!!.getBoundingClientRect().top;
-                //     if (location - window.scrollY < min) {
-                //         active = section;
-                //         min = location;
-                //     }
-                // });
-                // setActiveSection(active);
-                
             }
 
             // Sets up observer for each header
