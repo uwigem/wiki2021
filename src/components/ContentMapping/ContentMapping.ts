@@ -7,6 +7,8 @@ import { ExampleImage } from '../ContentWidgets/ExampleImage/ExampleImage';
 import { ExampleImageEditor } from '../ContentWidgets/ExampleImage/ExampleImageEditor';
 import { TabView } from '../ContentWidgets/TabView/TabView';
 import { TabViewEditor } from '../ContentWidgets/TabView/TabViewEditor';
+import { Header } from '../ContentWidgets/Header/Header';
+import { HeaderEditor } from '../ContentWidgets/Header/HeaderEditor';
 
 export type WidgetEditorProps = {
     originalContent: ContentSingularData,
@@ -25,7 +27,8 @@ export enum WidgetTypes {
     PLAIN_TEXT = "PLAIN_TEXT",
     STUB = "STUB",
     EXAMPLE_IMAGE = "EXAMPLE_IMAGE",
-    TAB_VIEW = "TAB_VIEW"
+    TAB_VIEW = "TAB_VIEW",
+    HEADER = "HEADER"
 }
 
 export const ContentMapping: ContentMappingType = {
@@ -44,5 +47,10 @@ export const ContentMapping: ContentMappingType = {
     TAB_VIEW: {
         widget: TabView,
         editor: TabViewEditor
+    },
+    HEADER: {
+        widget: Header,
+        editor: HeaderEditor
     }
+
 }
