@@ -1,3 +1,5 @@
+
+
 .sidebar-content-view {
     display: flex;
     justify-content: space-between;
@@ -35,8 +37,8 @@
     display: flex;
     justify-content: space-between center;
     align-items: center;
-    margin-right: 5rem;
-    width: 30%;
+    margin-right: 3rem;
+    width: 18%;
 }
 
 #sidebar-container {
@@ -50,7 +52,6 @@
 }
 
 #sidebar {
-    margin-right: 1rem;
     list-style: none;
     width: 90%;
     overflow: hidden;
@@ -63,9 +64,9 @@
     padding: 2px;
     cursor: pointer;
     width: 90%;
+    overflow: hidden;
     text-overflow: ellipsis;
     font-weight: bold;
-    margin-right: 3rem;
     text-align: right;
 }
 

@@ -9,6 +9,19 @@ export type SideBarProps = {
     activeSectionIndex: number
 }
 
+const onClickLink = (event: React.MouseEvent) => {
+    let id = event.currentTarget.id.split("-")[0];
+    document.getElementById(id)!!.scrollIntoView({behavior: "smooth"});
+    const yourElement = document.getElementById(event.currentTarget.id.split("-")[0]);
+    const yCoordinate = yourElement!!.getBoundingClientRect().top + window.pageYOffset;
+    const yOffset = -60; 
+
+    window.scrollTo({
+        top: yCoordinate + yOffset,
+        behavior: 'smooth'
+    });
+}
+
 export const SideBar: React.FC<SideBarProps> = ({
     contentData,
     pageTitle, 
@@ -22,30 +35,25 @@ export const SideBar: React.FC<SideBarProps> = ({
         return <></>;
     }
 
-    const onClick = (event: React.MouseEvent) => {
-        let location = document.getElementById(event.currentTarget.id.split("-")[0])!!.getBoundingClientRect().top - 100;
-        window.scrollTo({ top: location, behavior: 'smooth' });
-    }
-console.log(activeSectionIndex)
-    let progressStyle = {
-        height: activeSectionIndex + "%"
-    };
+    let generateSectionLinks = contentData[pageTitle].contentOrder!!.map((content) => {
+        let widgetInfo = contentData[pageTitle].content![content]
+        if (widgetInfo!.type == "HEADER") {
+            return <li id={content + "-link"} 
+                       key={content} 
+                       onClick={onClickLink} 
+                       className={content == activeSection ? "active-section" : "nonactive-section"}>
+                            {widgetInfo!.header_content}
+                   </li>;
+        } else {
+            return null;
+        }
+    });
+
     return <div id="sidebar-container">
         <ul id="sidebar">
-            {contentData[pageTitle].content && contentData[pageTitle].content ? 
-                contentData[pageTitle].contentOrder!!.map((content, index) => {
-                    if (contentData[pageTitle].content!![content]!!.type == "HEADER") {
-                        return <li id={content + "-link"} key={content} onClick={(event) => {window.scroll({top: document.getElementById(content)!!.getBoundingClientRect().top - 100, behavior: 'smooth'})}} 
-                        className={content == activeSection ? "active-section" : "nonactive-section"}>
-                        {contentData[pageTitle].content!![content]!!.header_content}
-                    </li>;
-                    } else {
-                        return null;
-                    }
-                })
-                : null}
+            {contentData[pageTitle].content ? generateSectionLinks : null}
         </ul>
-        <div id="sidebar-progress"><span style={progressStyle}>&nbsp;</span></div>
+        <div id="sidebar-progress"><span style={{height: activeSectionIndex + "%"}}>&nbsp;</span></div>
     </div>;
 
 }
