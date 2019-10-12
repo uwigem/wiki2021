@@ -32,6 +32,8 @@ export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle
 		return <></>
 	}
 
+	console.log("CONTENT", content);
+
 	return <>
 		{/** TODO: Add sidebar here if the page is a sidebar. */}
 		<div id="content-view-container">
@@ -39,6 +41,7 @@ export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle
 				contentData[pageString].content &&
 				contentData[pageString].contentOrder!.map((contentHash) => {
 					let content = contentData[pageString].content![contentHash];
+					console.log(content, contentHash)
 					let ContentWidget = ContentMapping[content!.type].widget;
 					return <div id={contentHash} key={contentHash}>
 						<ContentWidget {...content} />
