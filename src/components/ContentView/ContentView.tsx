@@ -38,30 +38,22 @@ export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle
 
             setActiveSection({section: sections[0], index: 0, numSections: sections.length});
 
-            let prevscroll = 0;
             const observerCallback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
                 let entry = entries[entries.length - 1];
-                let sectionID = entry.target.id.split("-")[0]
+                let fullID = entry.target.id.split("-");
+                let sectionID = fullID[0];
                 let sectionIndex = sections.indexOf(sectionID);
                 if (entry.boundingClientRect.top <= 0) {
-                    if (window.scrollY > prevscroll) {
                         setActiveSection({section: sectionID, 
-                                          index: sectionIndex, 
-                                          numSections: sections.length});
-                    } else {
-                        let index = sectionIndex - 1 < 0 ? sectionIndex : sectionIndex - 1
-                        setActiveSection({section: sections[index], 
-                                          index: index, 
-                                          numSections: sections.length});
-                    }
+                            index: sectionIndex, 
+                            numSections: sections.length});
                 }
-                prevscroll = window.scrollY;
             }
 
             const options = {
                 root: document.querySelector('#app-content-dev'),
-                rootMargin: '0px',
-                threshold: [0.0, 1.0]
+                rootMargin: '5px',
+                threshold: [0.0, 0.5, 1.0]
             };
 
             // Sets up observer for each header
@@ -70,7 +62,7 @@ export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle
                 let target = document.getElementById(content);
                 observer.observe(target!!);
             });
-            document.querySelectorAll(".section-enders").forEach((content) => {
+            document.querySelectorAll(".section-dividers").forEach((content) => {
                 observer.observe(content);
             });
         }
@@ -83,7 +75,20 @@ export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle
         return <></>
     }
 
+    let prettyDividerStyle = {
+        height: "5px",
+        width: "50%",
+        backgroundColor: "#420DAB",
+        borderRadius: "5",
+        marginRight: "auto",
+        marginLeft: "auto"
+    }
+    let prevHeader = "";
     return <>
+        {/* {contentData[pageString].contentOrder &&
+         contentData[pageString].content && 
+         contentData[pageString].content![contentData[pageString].contentOrder![0]]!.type == "BANNER" ? 
+            (let ContentWidget = ContentMapping[content!.type].widget; <ContentWidget {...content} />) : null} */}
         <div className={contentData[pageString].hasSidebar ? "sidebar-content-view" : ""}>
             {
             contentData[pageString].hasSidebar ? 
@@ -101,11 +106,16 @@ export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle
                         let nextContentHash = contentData[pageString].contentOrder![index + 1] || 
                             contentData[pageString].contentOrder![index]
                         let nextContentType = contentData[pageString].content![nextContentHash]!.type
+                        prevHeader = content!.type == "HEADER" ? contentHash : prevHeader;
 
-                        return <div id={contentHash} key={contentHash}>
+                        let sectionDividerBegin = <div id={nextContentHash + "-begin"} className="section-dividers" style={{height: "5px", width: "100%", marginBottom: "4rem"}}>&nbsp;</div>
+                        let sectionDividerEnd = <div id={prevHeader + "-end"} className="section-dividers" style={{height: "5px", width: "100%", marginBottom: "4rem"}}>&nbsp;</div>
+
+                        return content!.type == "BANNER" ? null : <div id={contentHash} key={contentHash}>
                             <ContentWidget {...content} />
-                            {nextContentType == "HEADER" ? 
-                                <div id={nextContentHash + "-begin"} className="section-enders" style={{height: "5px", width: "100%", marginBottom: "4rem"}}>&nbsp;</div> : null}
+                            {nextContentType == "HEADER" ? sectionDividerEnd : null}
+                            {nextContentType == "HEADER" ? <div style={prettyDividerStyle}>&nbsp;</div> : null}
+                            {nextContentType == "HEADER" ? sectionDividerBegin : null}
                         </div>
                     })
                 }

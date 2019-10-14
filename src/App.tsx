@@ -28,7 +28,7 @@ type AppProps = {
 	firebase?: any,
 	ContentEditor: React.FC<ContentEditorProps>
 }
-const debugURL = "/Editor";
+const debugURL = "/SidebarTest";
 
 /**
  * App is the main application that handles all the route logic and rendering.

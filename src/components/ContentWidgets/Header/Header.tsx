@@ -9,6 +9,10 @@ import { ContentSingularData } from '../../_data/ContentSingularData';
  * September 1, 2019
  */
 export const Header: React.FC<ContentSingularData> = ({ header_content, header_priority }) => {
+    if (!header_content || !header_priority) {
+        return <></>;
+    }
+
     let header;
     if (header_priority == 1) {
         header =  <h1>{header_content}</h1>;
@@ -16,7 +20,7 @@ export const Header: React.FC<ContentSingularData> = ({ header_content, header_p
         header =  <h2>{header_content}</h2>;
     } else if (header_priority == 3) {
         header =  <h3>{header_content}</h3>;
-    } else {
+    } else if (header_priority == 4) {
         header =  <h4>{header_content}</h4>;
     }
 

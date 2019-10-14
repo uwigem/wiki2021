@@ -14,7 +14,7 @@ const onClickLink = (event: React.MouseEvent) => {
     document.getElementById(id)!!.scrollIntoView({behavior: "smooth"});
     const yourElement = document.getElementById(event.currentTarget.id.split("-")[0]);
     const yCoordinate = yourElement!!.getBoundingClientRect().top + window.pageYOffset;
-    const yOffset = -60; 
+    const yOffset = -50; 
 
     window.scrollTo({
         top: yCoordinate + yOffset,
@@ -49,7 +49,7 @@ export const SideBar: React.FC<SideBarProps> = ({
         }
     });
 
-    return <div id="sidebar-container">
+    return <div id="sidebar-container" style={{height: (contentData[pageTitle].contentOrder!.length * 12) + "px"}}>
         <ul id="sidebar">
             {contentData[pageTitle].content ? generateSectionLinks : null}
         </ul>

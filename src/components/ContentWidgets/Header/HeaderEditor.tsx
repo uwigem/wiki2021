@@ -14,6 +14,10 @@ export const HeaderEditor: React.FC<WidgetEditorProps> = ({
         header = <h4>{editedContent.header_content}</h4>;
     }
 
+    if (!editedContent.header_priority) {
+        setEditedContentOnChange("header_priority", 1);
+    }
+
     return <>
         {header}
         <hr />
