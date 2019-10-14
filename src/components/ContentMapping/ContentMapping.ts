@@ -60,7 +60,8 @@ export enum WidgetTypes {
 	GALLERY = "GALLERY",
 	WYSIWYG_EDITOR = "WYSIWYG_EDITOR",
 	BANNER = "BANNER",
-    ACCORDION = "ACCORDION"
+    ACCORDION = "ACCORDION",
+    HEADER = "HEADER"
 }
 
 export const ContentMapping: ContentMappingType = {
@@ -129,5 +130,11 @@ export const ContentMapping: ContentMappingType = {
 		editor: AccordionEditor,
 		displayName: "Accordion",
 		widgetCategory: WidgetCategories.Display
-	}
+    },
+    HEADER: {
+        widget: Header,
+        editor: HeaderEditor,
+        displayName: "Header",
+		widgetCategory: WidgetCategories.Text
+    }
 }

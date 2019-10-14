@@ -25,7 +25,15 @@
     border-radius: 50px;
 }
 
-#content-view-container {
+/* #content-view-container h1, 
+#content-view-container h2, 
+#content-view-container h3 {
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-top: 3rem;
+} */
+
+.content-view-container-w-sidebar {
     width: 50%;
     margin-left: 5px;
 }

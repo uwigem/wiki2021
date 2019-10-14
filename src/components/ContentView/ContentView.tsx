@@ -44,9 +44,9 @@ export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle
                 let sectionID = fullID[0];
                 let sectionIndex = sections.indexOf(sectionID);
                 if (entry.boundingClientRect.top <= 0) {
-                        setActiveSection({section: sectionID, 
-                            index: sectionIndex, 
-                            numSections: sections.length});
+                    setActiveSection({section: sectionID, 
+                        index: sectionIndex, 
+                        numSections: sections.length});
                 }
             }
 
@@ -84,11 +84,21 @@ export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle
         marginLeft: "auto"
     }
     let prevHeader = "";
+
+    const checkBanner = () => {
+        if (contentData[pageString].contentOrder &&
+            contentData[pageString].content && 
+            contentData[pageString].content![contentData[pageString].contentOrder![0]]!.type === "BANNER") {
+            let firstID = contentData[pageString].contentOrder![0]
+            let content = contentData[pageString].content![firstID];
+            let ContentWidget = ContentMapping[content!.type].widget;
+            return <ContentWidget {...content} />
+        } else {
+            return ""
+        }
+    }
     return <>
-        {/* {contentData[pageString].contentOrder &&
-         contentData[pageString].content && 
-         contentData[pageString].content![contentData[pageString].contentOrder![0]]!.type == "BANNER" ? 
-            (let ContentWidget = ContentMapping[content!.type].widget; <ContentWidget {...content} />) : null} */}
+        {checkBanner()}
         <div className={contentData[pageString].hasSidebar ? "sidebar-content-view" : ""}>
             {
             contentData[pageString].hasSidebar ? 
@@ -96,7 +106,7 @@ export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle
                 activeSectionIndex={Math.round((activeSection.index + 1) / activeSection.numSections * 100.0)} /> : null
             }
             
-            <div id="content-view-container">
+            <div id="content-view-container" className={contentData[pageString].hasSidebar ? "content-view-container-w-sidebar" : ""}>
                 {contentData[pageString].contentOrder &&
                     contentData[pageString].content &&
                     contentData[pageString].contentOrder!.map((contentHash, index) => {
