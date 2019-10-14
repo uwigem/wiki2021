@@ -7,8 +7,8 @@ import { SideBar } from '../ContentWidgets/SideBar/SideBar';
 
 
 export type ContentViewProps = {
-    contentData: ContentData,
-    pageTitle: string
+	contentData: ContentData,
+	pageTitle: string
 }
 
 /**
@@ -68,12 +68,12 @@ export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle
         }
     }, [contentData]);
 
-    let pageString = pageTitle === "" ? "MAIN_PAGE_DO_NOT_EDIT" :
-        pageTitle.substring(1, pageTitle.length);
+	let pageString = pageTitle === "" ? "MAIN_PAGE_DO_NOT_EDIT" :
+		pageTitle.substring(1, pageTitle.length);
 
-    if (!contentData || !contentData[pageString]) {
-        return <></>
-    }
+	if (!contentData || !contentData[pageString]) {
+		return <></>
+	}
 
     let prettyDividerStyle = {
         height: "5px",
