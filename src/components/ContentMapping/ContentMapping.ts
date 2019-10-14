@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { PlainText } from '../ContentWidgets/PlainText/PlainText';
 import { PlainTextEditor } from '../ContentWidgets/PlainText/PlainTextEditor';
 import { Stub, StubEditor } from '../ContentWidgets/_Stub/Stub';
@@ -60,81 +60,81 @@ export enum WidgetTypes {
 	GALLERY = "GALLERY",
 	WYSIWYG_EDITOR = "WYSIWYG_EDITOR",
 	BANNER = "BANNER",
-    ACCORDION = "ACCORDION",
-    HEADER = "HEADER"
+	ACCORDION = "ACCORDION",
+	HEADER = "HEADER"
 }
 
 export const ContentMapping: ContentMappingType = {
 	// PLAIN_TEXT: {
-	// 	widget: PlainText,
+	// 	widget: memo(PlainText,
 	// 	editor: PlainTextEditor,
 	// 	displayName: "Plain Text",
 	// 	widgetCategory: WidgetCategories.Text
 	// },
 	STUB: {
-		widget: Stub,
+		widget: memo(Stub),
 		editor: StubEditor,
 		displayName: "Stub",
 		widgetCategory: WidgetCategories.Display
 	},
 	TAB_VIEW: {
-		widget: TabView,
+		widget: memo(TabView),
 		editor: TabViewEditor,
 		displayName: "Tab View",
 		widgetCategory: WidgetCategories.Display
 	},
 	IMAGES_IN_ROW: {
-		widget: ImagesInRow,
+		widget: memo(ImagesInRow),
 		editor: ImagesInRowEditor,
 		displayName: "Images in Row",
 		widgetCategory: WidgetCategories.Media
 	},
 	SEPARATOR: {
-		widget: Separator,
+		widget: memo(Separator),
 		editor: SeparatorEditor,
 		displayName: "Seperator",
 		widgetCategory: WidgetCategories.Display
 	},
 	PDF_VIEWER: {
-		widget: PdfViewer,
+		widget: memo(PdfViewer),
 		editor: PdfViewerEditor,
 		displayName: "PDF Viewer",
 		widgetCategory: WidgetCategories.Media
 	},
 	VIDEO: {
-		widget: Video,
+		widget: memo(Video),
 		editor: VideoEditor,
 		displayName: "Video",
 		widgetCategory: WidgetCategories.Media
 	},
 	GALLERY: {
-		widget: Gallery,
+		widget: memo(Gallery),
 		editor: GalleryEditor,
 		displayName: "Gallery",
 		widgetCategory: WidgetCategories.Media
 	},
 	WYSIWYG_EDITOR: {
-		widget: WYSIWYGWidget,
+		widget: memo(WYSIWYGWidget),
 		editor: WYSIWYGEditor,
 		displayName: "Rich Text Editor",
 		widgetCategory: WidgetCategories.Text
 	},
 	BANNER: {
-		widget: Banner,
+		widget: memo(Banner),
 		editor: BannerEditor,
 		displayName: "Banner",
 		widgetCategory: WidgetCategories.Display
 	},
 	ACCORDION: {
-		widget: Accordion,
+		widget: memo(Accordion),
 		editor: AccordionEditor,
 		displayName: "Accordion",
 		widgetCategory: WidgetCategories.Display
-    },
-    HEADER: {
-        widget: Header,
-        editor: HeaderEditor,
-        displayName: "Header",
+	},
+	HEADER: {
+		widget: memo(Header),
+		editor: HeaderEditor,
+		displayName: "Header",
 		widgetCategory: WidgetCategories.Text
-    }
+	}
 }
