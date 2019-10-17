@@ -24,7 +24,7 @@ export const Header: React.FC<ContentSingularData> = ({ header_content, header_p
         header =  <h4>{header_content}</h4>;
     }
 
-    return <div>
+    return <>
         {header}
-    </div>
+    </>
 }
