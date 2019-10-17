@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { ContentData } from '../_data/Data';
 import { ContentMapping } from '../../components/ContentMapping/ContentMapping';
 import equal from 'deep-equal';
