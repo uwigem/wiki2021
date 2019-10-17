@@ -2,6 +2,7 @@ import { BannerContent } from '../ContentWidgets/Banner/Banner';
 import { Tab } from '../ContentWidgets/TabView/TabView';
 import { ImgRowItem } from '../ContentWidgets/ImagesInRow/ImagesInRow';
 import { AccordionPageProps } from '../ContentWidgets/Accordion/Accordion'
+import { SingleVerticalSlideshowContent } from '../ContentWidgets/VerticalSlideshow/VerticalSlideshow';
 
 export type ContentSingularData = {
 	[idx: string]: any
@@ -20,5 +21,6 @@ export type ContentSingularData = {
 	separator_color?: { r: number; g: number; b: number }
 	tabView_content?: Tab[]
 	gallery_content?: string[]
-	wysiwyg_content?: string
+	wysiwyg_content?: string,
+	vertical_slideshow_content?: SingleVerticalSlideshowContent[]
 }

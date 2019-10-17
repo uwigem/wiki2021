@@ -1,0 +1,25 @@
+.vertical-slideshow {
+	height: 60vh;
+}
+
+.vertical-slideshow-editor input {
+	padding: 15px;
+	margin: 0;
+}
+
+.vertical-slideshow-editor button {
+	width: 60px;
+	padding: 12px 0;
+	border-radius: 10%;
+	font-size: 15px;
+}
+
+.vertical-slideshow-delete-button {
+	border-color: var(--failure-primary);
+	color: var(--failure-primary);
+}
+
+.vertical-slideshow-add-button {
+	display: block;
+	margin: 15px auto;
+}

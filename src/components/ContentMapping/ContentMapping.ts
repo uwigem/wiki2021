@@ -24,6 +24,8 @@ import { WYSIWYGEditor } from '../ContentWidgets/WYSIWYG/WYSIWYGEditor';
 import { WYSIWYGWidget } from '../ContentWidgets/WYSIWYG/WYSIWYGWidget';
 import { Accordion } from '../ContentWidgets/Accordion/Accordion';
 import { AccordionEditor } from '../ContentWidgets/Accordion/AccordionEditor';
+import { VerticalSlideshow } from '../ContentWidgets/VerticalSlideshow/VerticalSlideshow';
+import { VerticalSlideshowEditor } from '../ContentWidgets/VerticalSlideshow/VerticalSlideshowEditor';
 
 export type WidgetEditorProps = {
 	originalContent: ContentSingularData,
@@ -58,7 +60,8 @@ export enum WidgetTypes {
 	GALLERY = "GALLERY",
 	WYSIWYG_EDITOR = "WYSIWYG_EDITOR",
 	BANNER = "BANNER",
-	ACCORDION = "ACCORDION"
+	ACCORDION = "ACCORDION",
+	VERTICAL_SLIDESHOW = "VERTICAL_SLIDESHOW"
 }
 
 export const ContentMapping: ContentMappingType = {
@@ -127,5 +130,11 @@ export const ContentMapping: ContentMappingType = {
 		editor: AccordionEditor,
 		displayName: "Accordion",
 		widgetCategory: WidgetCategories.Display
+	},
+	VERTICAL_SLIDESHOW: {
+		widget: VerticalSlideshow,
+		editor: VerticalSlideshowEditor,
+		displayName: "Vertical Slideshow",
+		widgetCategory: WidgetCategories.Media
 	}
 }
