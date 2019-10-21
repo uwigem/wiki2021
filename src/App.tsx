@@ -13,6 +13,10 @@ import { ContentView } from './components/ContentView/ContentView';
 import { NavigationBottom } from './components/NavigationBottom/NavigationBottom';
 import "./App.css";
 import { FONT_FAMILY } from './components/_data/Constants';
+import { HardCodedMainPage } from './components/HardcodedMainPage/HardCodedMainPage';
+import { Team } from './components/HardCodedTeamPage/LegacyHardCodedTeamPage';
+import { Sponsors } from './components/HardCodedSponsorsPage/LegacyHardCodedSponsorsPage';
+
 
 // This line is to remove a bug that Firefox has
 // TODO: insert link explaining why
@@ -159,8 +163,9 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
 								contentData={contentData}
 								currYear={currYear}
 							/>}
-						{/*****************************************/}
-						{pageTitle !== "/Editor" && (pageTitle === "" || pageTitle === "/Description") &&
+						{/******HARDCODED DESCRIPTION PAGE**********/}
+						{pageTitle !== "/Editor"
+							&& (pageTitle === "/Description") &&
 							<div className="main-temporary">
 								{pageTitle !== '/Description' &&
 									<div>
@@ -188,8 +193,24 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
                                 </p>
 							</div>}
 
-						{/*****************************************/}
-						{pageTitle !== "/Editor" && pageTitle !== "" &&
+						{/*********HARDCODED MAIN PAGE*********** */}
+						{pageTitle !== "/Editor"
+							&& pageTitle === "" &&
+							<HardCodedMainPage a={a} />}
+						{/*********HARCODED TEAM PAGE *********** */}
+						{pageTitle !== "/Editor"
+							&& pageTitle === "/Team"
+							&& <Team data={Data.getTeamData()} />
+
+						}
+						{/** HARDCODED SPONSORS PAGE */}
+						{pageTitle !== "/Editor"
+							&& pageTitle === "/Sponsors"
+							&& <Sponsors data={Data.getSponsorsData()} />
+
+						}
+						{/*********REGULAR CONTENT VIEW*************/}
+						{pageTitle !== "/Editor" && pageTitle !== "" && pageTitle !== "/MAIN_PAGE" &&
 							<ContentView contentData={contentData} pageTitle={pageTitle} />
 						}
 					</div>

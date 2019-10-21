@@ -1,10 +1,6 @@
 import React, { memo } from 'react';
-import { PlainText } from '../ContentWidgets/PlainText/PlainText';
-import { PlainTextEditor } from '../ContentWidgets/PlainText/PlainTextEditor';
 import { Stub, StubEditor } from '../ContentWidgets/_Stub/Stub';
 import { ContentSingularData } from '../_data/ContentSingularData';
-import { ExampleImage } from '../ContentWidgets/ExampleImage/ExampleImage';
-import { ExampleImageEditor } from '../ContentWidgets/ExampleImage/ExampleImageEditor';
 import { Banner } from '../ContentWidgets/Banner/Banner';
 import { BannerEditor } from '../ContentWidgets/Banner/BannerEditor';
 import { TabView } from '../ContentWidgets/TabView/TabView';
@@ -26,6 +22,13 @@ import { WYSIWYGEditor } from '../ContentWidgets/WYSIWYG/WYSIWYGEditor';
 import { WYSIWYGWidget } from '../ContentWidgets/WYSIWYG/WYSIWYGWidget';
 import { Accordion } from '../ContentWidgets/Accordion/Accordion';
 import { AccordionEditor } from '../ContentWidgets/Accordion/AccordionEditor';
+import { TeamPage } from '../ContentWidgets/TeamPage/TeamPage';
+import { TeamPageEditor } from '../ContentWidgets/TeamPage/TeamPageEditor';
+import { ImageCarousel } from '../ContentWidgets/ImageCarousel.tsx/ImageCarousel';
+import { ImageCarouselEditor } from '../ContentWidgets/ImageCarousel.tsx/ImageCarouselEditor';
+import { ExampleImage } from '../ContentWidgets/ExampleImage/ExampleImage';
+import { ExampleImageEditor } from '../ContentWidgets/ExampleImage/ExampleImageEditor';
+
 
 export type WidgetEditorProps = {
 	originalContent: ContentSingularData,
@@ -61,7 +64,9 @@ export enum WidgetTypes {
 	WYSIWYG_EDITOR = "WYSIWYG_EDITOR",
 	BANNER = "BANNER",
 	ACCORDION = "ACCORDION",
-	HEADER = "HEADER"
+	TEAMPAGE = "TEAMPAGE",
+	HEADER = "HEADER",
+	IMAGE_CAROUSEL = "IMAGE_CAROUSEL",
 }
 
 export const ContentMapping: ContentMappingType = {
@@ -136,5 +141,17 @@ export const ContentMapping: ContentMappingType = {
 		editor: HeaderEditor,
 		displayName: "Header",
 		widgetCategory: WidgetCategories.Text
+	},
+	CAROUSEL: {
+		widget: memo(ImageCarousel),
+		editor: ImageCarouselEditor,
+		displayName: "Image Carousel",
+		widgetCategory: WidgetCategories.Media
+	},
+	IMAGE: {
+		widget: memo(ExampleImage),
+		editor: ExampleImageEditor,
+		displayName: "Image",
+		widgetCategory: WidgetCategories.Media
 	}
 }

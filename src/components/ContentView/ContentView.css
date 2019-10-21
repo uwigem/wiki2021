@@ -1,4 +1,8 @@
-
+/* Styles content view based on whether page has sidebar */
+.content-view-container-w-sidebar {
+    width: 50%;
+    margin-left: 5px;
+}
 
 .sidebar-content-view {
     display: flex;
@@ -12,6 +16,7 @@
     flex-grow: 1;
 }
 
+/* Styles the sidebar progress bar */
 #sidebar-progress {
     width: 5px;
     background-color: darkgrey;
@@ -25,11 +30,7 @@
     border-radius: 50px;
 }
 
-.content-view-container-w-sidebar {
-    width: 50%;
-    margin-left: 5px;
-}
-
+/* Styles sidebar */
 #sidebar-container {
     position: sticky;
     top: 20%;
@@ -45,6 +46,7 @@
     display: none;
 }
 
+/* Hides sidebar when width is less than 600px */
 @media (min-width: 600px) {
     #sidebar-container {
         display: flex;
@@ -70,6 +72,7 @@
     text-align: right;
 }
 
+/* Styles sidebar hashlinks based on display content */
 li.nonactive-section {
     color: darkgrey;
 }
