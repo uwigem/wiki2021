@@ -9,6 +9,7 @@ import {
 	LIVE_EDIT_TIMETOUT,
 	LIVE_EDIT_REFRESH
 } from '../../_data/Constants';
+import WidgetSaveAlert, { WidgetSaveStatus } from './WidgetSaveAlert';
 
 type WidgetLiveEditProps = {
 	contentHash: string,
@@ -36,7 +37,8 @@ enum EditingState {
 export const WidgetLiveEdit: React.FC<WidgetLiveEditProps> = ({
 	contentHash, currYear, pageToEdit, user, editing, setEditing, editedContent, deleteWidget
 }) => {
-
+	const [alertTimeoutId, setAlertTimeoutId] = useState<number>(0)
+	const [alertStatus, setAlertStatus] = useState<WidgetSaveStatus>(WidgetSaveStatus.NONE)
 	let [editingState, setEditingState] = useState<EditingState>(EditingState.SAFE);
 
 	let widgetRef: firebase.database.Reference = firebase.database().ref(`${currYear}/LiveEditHistory/${pageToEdit}/${contentHash}`);
@@ -91,17 +93,29 @@ export const WidgetLiveEdit: React.FC<WidgetLiveEditProps> = ({
 	let button = editing ?
 		<Button variant="contained" color="primary"
 			onClick={async () => {
-				await firebase.database().ref(`${currYear}/ContentData/${pageToEdit}/content/${contentHash}`).set(editedContent);
-				await firebase.database().ref(`${currYear}/EditHistory/${pageToEdit}/${contentHash}`).push({
-					type: HistoryTypes.UPDATE,
-					timestamp: firebase.database.ServerValue.TIMESTAMP,
-					creator: (user && user.email) || "Unknown user",
-					content: editedContent
-				});
-				await widgetRef.update({
-					saved: true
-				});
-				setEditing(false);
+				try {
+					await firebase.database().ref(`${currYear}/ContentData/${pageToEdit}/content/${contentHash}`).set(editedContent);
+					await firebase.database().ref(`${currYear}/EditHistory/${pageToEdit}/${contentHash}`).push({
+						type: HistoryTypes.UPDATE,
+						timestamp: firebase.database.ServerValue.TIMESTAMP,
+						creator: (user && user.email) || "Unknown user",
+						content: editedContent
+					});
+					await widgetRef.update({
+						saved: true
+					});
+					// TODO: REMOVE LINE BELOW
+					throw new Error("manually thrown error")
+					setEditing(false);
+				} catch (error) {
+					clearTimeout(alertTimeoutId)
+					setAlertStatus(WidgetSaveStatus.FAILURE)
+					const newId = setTimeout(() => {
+						setAlertStatus(WidgetSaveStatus.NONE)
+					}, 5000)
+					// @ts-ignore
+					setAlertTimeoutId(newId)
+				}
 			}}>
 			Save
 		</Button> :
@@ -129,11 +143,18 @@ export const WidgetLiveEdit: React.FC<WidgetLiveEditProps> = ({
 		</Button>
 		);
 
-	return <div className="widget-button-container">
-		{button}
-		<div className="widget-editor-padding-left">
-			<Button variant="contained" color="primary"
-				onClick={() => deleteWidget(contentHash)}>Delete</Button>
-		</div>
-	</div>
+	return (
+		<>
+			<WidgetSaveAlert status={alertStatus} />
+			<div className="widget-button-container">
+				{button}
+				<div className="widget-editor-padding-left">
+					<Button variant="contained" color="primary"
+						onClick={() => deleteWidget(contentHash)}>Delete</Button>
+				</div>
+			</div>
+		</>
+	)
+
+
 }
