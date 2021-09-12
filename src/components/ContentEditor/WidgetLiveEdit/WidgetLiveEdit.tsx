@@ -104,12 +104,19 @@ export const WidgetLiveEdit: React.FC<WidgetLiveEditProps> = ({
 					await widgetRef.update({
 						saved: true
 					});
-					// TODO: REMOVE LINE BELOW
-					throw new Error("manually thrown error")
 					setEditing(false);
 				} catch (error) {
 					clearTimeout(alertTimeoutId)
 					setAlertStatus(WidgetSaveStatus.FAILURE)
+					const newId = setTimeout(() => {
+						setAlertStatus(WidgetSaveStatus.NONE)
+					}, 5000)
+					// @ts-ignore
+					setAlertTimeoutId(newId)
+				}
+				if (alertStatus === WidgetSaveStatus.LOADING) {
+					clearTimeout(alertTimeoutId)
+					setAlertStatus(WidgetSaveStatus.SUCCESS)
 					const newId = setTimeout(() => {
 						setAlertStatus(WidgetSaveStatus.NONE)
 					}, 5000)
