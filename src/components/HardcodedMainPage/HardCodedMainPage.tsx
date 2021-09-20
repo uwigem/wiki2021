@@ -8,6 +8,7 @@ import PlantCube from './PlantCube';
 import styles from './HardCodedMainPage.module.css';
 import { Euler } from 'three';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 type HardCodedMainPageProps = {
 	a: () => void
@@ -53,7 +54,7 @@ export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 						</Col>
 						<Col md={6}>
 							{/** SIDE IMAGE GOES HERE */}
-							<PlantCube className={styles.plantCube} rotations={eulerRotation}/>
+							<PlantCube className={styles.plantCube} rotations={eulerRotation} />
 							<Form.Label>Euler Y</Form.Label>
 							<Form.Control type="range" onChange={ e => {
 								setEulerRotation(oldRot => {
@@ -63,6 +64,22 @@ export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 									return newRot;
 								})
 							}}/>
+							<Button onClick={() => {
+								setEulerRotation(oldRot => {
+									let newRot = oldRot.clone();
+									newRot.y = 0 / 100 * 2 * Math.PI
+									console.log(newRot);
+									return newRot;
+								})
+							}}>0%</Button>
+							<Button onClick={() => {
+								setEulerRotation(oldRot => {
+									let newRot = oldRot.clone();
+									newRot.y = 100 / 100 * 2 * Math.PI
+									console.log(newRot);
+									return newRot;
+								})
+							}}>100%</Button>
 						</Col>
 					</Row>
 				</Grid>

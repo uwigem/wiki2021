@@ -1,3 +1,4 @@
+import { render } from 'enzyme';
 import React, { useEffect, useRef, useState } from 'react';
 import { Euler, Vector3, WebGLRenderer, Scene, PerspectiveCamera, BoxGeometry, MeshBasicMaterial, Mesh } from 'three';
 
@@ -15,9 +16,12 @@ const FAR_CLIP_PLANE = 1000;
 export default function PlantCube({ className, rotations=ZERO }: PlantCubeType) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [currRotations, setCurrRotations] = useState<Euler>(rotations);
-
+    const [cube, setCube] = useState<Mesh | undefined>(undefined);
+    const [renderer, setRenderer] = useState<WebGLRenderer| undefined>(undefined);
+    const [scene, setScene] = useState<Scene | undefined>(undefined);
+    const [camera, setCamera] = useState<PerspectiveCamera | undefined>(undefined);
     useEffect(() => {
-        console.log('plantcube useEffect');
+        console.log('plantcube setup useEffect');
 
         const scene = new Scene();
         const width = canvasRef.current!.clientWidth;
@@ -43,32 +47,42 @@ export default function PlantCube({ className, rotations=ZERO }: PlantCubeType) 
         cube.rotation.y = currRotations.y;
         cube.rotation.z = currRotations.z;
         cube.geometry.scale(2, 2, 2);
-        console.log(getDeltaVector(currRotations, rotations))
-        const animate = () => {
-            const requestId = requestAnimationFrame(() => animate());
-            // const deltaRotations = getDeltaVector(currRotations, rotations);
-            // cube.rotation.x += deltaRotations.x;
-            cube.rotation.y += 0.01; // deltaRotations.y;
-            // cube.rotation.z += deltaRotations.z;
-            // cube.setRotationFromEuler(
-            //     cube.rotation
-            //         .clone()
-            //         .setFromVector3(modVector3(cube.rotation.toVector3(), Math.PI * 2))
-            // );
-            setCurrRotations(new Euler(
-                cube.rotation.x,
-                cube.rotation.y,
-                cube.rotation.z,
-                'XYZ'
-            ));
-            // console.log(cube.rotation);
+        setCube(cube);
+        setRenderer(renderer);
+        setScene(scene);
+        setCamera(camera);
+    }, [canvasRef]);
 
-            renderer.render(scene, camera);
-            return requestId;
+    useEffect(() => {
+        console.log('plantcube update useEffect');
+
+        if (cube && renderer && scene && camera) {
+            const animate = () => {
+                const requestId = requestAnimationFrame(() => animate());
+                let rotY = cube.rotation.y;
+                console.log(rotY, rotations.y);
+
+                if (Math.abs(rotY - rotations.y) < 0.005) {
+                    // do nothing
+                } else if (rotY < rotations.y) {
+                    rotY += 0.003;
+                } else if (rotY > rotations.y) {
+                    rotY -= 0.003;
+                }
+                setCurrRotations(new Euler(
+                    cube.rotation.x,
+                    rotY,
+                    cube.rotation.z,
+                    'XYZ'
+                ));
+                cube.rotation.y = rotY;
+                renderer.render(scene, camera);
+                return requestId;
+            }
+            const requestId = animate();
+            return () => { cancelAnimationFrame(requestId) };
         }
-        const requestId = animate();
-        return () => cancelAnimationFrame(requestId);
-    }, [canvasRef, rotations]);
+    }, [rotations, cube, scene, camera])
 
     return <canvas className={className} ref={canvasRef}></canvas>
 }
