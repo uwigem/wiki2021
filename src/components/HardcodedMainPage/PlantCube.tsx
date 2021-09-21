@@ -1,10 +1,11 @@
-import { render } from 'enzyme';
-import React, { useEffect, useRef, useState } from 'react';
-import { Euler, Vector3, WebGLRenderer, Scene, PerspectiveCamera, BoxGeometry, MeshBasicMaterial, Mesh } from 'three';
+import React, { useEffect, useRef } from 'react';
+import { Euler, Vector3, WebGLRenderer, Scene, PerspectiveCamera, BoxGeometry, MeshBasicMaterial, Mesh, DirectionalLight, Object3D, AxesHelper } from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export type PlantCubeType = {
     className?: string
-    rotations?: Euler // use default rotation order only (XYZ)
+    rotation?: Euler // use default rotation order only (XYZ)
 }
 
 const ZERO: Euler = new Euler(0, 0, 0, 'XYZ');
@@ -12,14 +13,14 @@ const ZERO: Euler = new Euler(0, 0, 0, 'XYZ');
 const FOV = 75;
 const NEAR_CLIP_PLANE = 0.1;
 const FAR_CLIP_PLANE = 1000;
+const moveScale = 0.0025;
+const moveScaleX = 1;
+const moveScaleY = 0.5;
+const moveScaleZ = 1;
 
-export default function PlantCube({ className, rotations=ZERO }: PlantCubeType) {
+export default function PlantCube({ className, rotation=ZERO }: PlantCubeType) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [currRotations, setCurrRotations] = useState<Euler>(rotations);
-    const [cube, setCube] = useState<Mesh | undefined>(undefined);
-    const [renderer, setRenderer] = useState<WebGLRenderer| undefined>(undefined);
-    const [scene, setScene] = useState<Scene | undefined>(undefined);
-    const [camera, setCamera] = useState<PerspectiveCamera | undefined>(undefined);
+
     useEffect(() => {
         console.log('plantcube setup useEffect');
 
@@ -33,56 +34,53 @@ export default function PlantCube({ className, rotations=ZERO }: PlantCubeType) 
             NEAR_CLIP_PLANE,
             FAR_CLIP_PLANE
         );
+        camera.position.y = 3;
+        camera.rotateX(-0.25);
 
-        const geometry = new BoxGeometry(1, 1, 1);
-        const material = new MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
-        const cube = new Mesh(geometry, material);
-        scene.add(cube);
+        const axesHelper = new AxesHelper(5);
+        scene.add(axesHelper);
+
+
+
+        let cube: Object3D;
+
+        const loader = new GLTFLoader();
+        loader.load("grassCube.gltf", function (gltf) {
+            const scale = 1.25;
+            console.log(gltf.scene.children);
+            cube = gltf.scene.children[0]
+            cube.scale.set(scale, scale, scale);
+            cube.rotateY(0.5);
+            cube.position.y += 0.5
+            scene.add(cube);
+        }) ;
+
+        const light1 = new DirectionalLight( 0xefefff, 1.5 );
+        light1.position.set( 1, 1, 1 ).normalize();
+        scene.add( light1 );
 
         camera.position.z = 5;
 
-        const renderer = new WebGLRenderer({ canvas: canvasRef.current! });
+        const renderer = new WebGLRenderer({ canvas: canvasRef.current!, alpha: true });
         renderer.setSize(width!, height!);
-        cube.rotation.x = currRotations.x;
-        cube.rotation.y = currRotations.y;
-        cube.rotation.z = currRotations.z;
-        cube.geometry.scale(2, 2, 2);
-        setCube(cube);
-        setRenderer(renderer);
-        setScene(scene);
-        setCamera(camera);
-    }, [canvasRef]);
+        const orbitControls = new OrbitControls(camera, canvasRef.current!);
 
-    useEffect(() => {
-        console.log('plantcube update useEffect');
-
-        if (cube && renderer && scene && camera) {
-            const animate = () => {
-                const requestId = requestAnimationFrame(() => animate());
-                let rotY = cube.rotation.y;
-                console.log(rotY, rotations.y);
-
-                if (Math.abs(rotY - rotations.y) < 0.005) {
-                    // do nothing
-                } else if (rotY < rotations.y) {
-                    rotY += 0.003;
-                } else if (rotY > rotations.y) {
-                    rotY -= 0.003;
-                }
-                setCurrRotations(new Euler(
-                    cube.rotation.x,
-                    rotY,
-                    cube.rotation.z,
-                    'XYZ'
-                ));
-                cube.rotation.y = rotY;
-                renderer.render(scene, camera);
-                return requestId;
+        const animate = (value: number) => {
+            if (value > Math.PI * 2) {
+                value = 0;
             }
-            const requestId = animate();
-            return () => { cancelAnimationFrame(requestId) };
+            const requestId = requestAnimationFrame(() => animate(value + 0.01));
+            if (cube) {
+                cube.position.y += moveScaleX * moveScale * Math.cos(value);
+                cube.position.x += moveScaleY * moveScale * Math.sin(value);
+                cube.position.z += moveScaleZ * moveScale * Math.sin(value);
+                renderer.render(scene, camera);
+            }
+            return requestId;
         }
-    }, [rotations, cube, scene, camera])
+        const requestId = animate(0);
+        return () => { cancelAnimationFrame(requestId) };
+    }, [canvasRef]);
 
     return <canvas className={className} ref={canvasRef}></canvas>
 }

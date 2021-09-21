@@ -54,7 +54,7 @@ export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 						</Col>
 						<Col md={6}>
 							{/** SIDE IMAGE GOES HERE */}
-							<PlantCube className={styles.plantCube} rotations={eulerRotation} />
+							<PlantCube className={styles.plantCube} rotation={eulerRotation} />
 							<Form.Label>Euler Y</Form.Label>
 							<Form.Control type="range" onChange={ e => {
 								setEulerRotation(oldRot => {
