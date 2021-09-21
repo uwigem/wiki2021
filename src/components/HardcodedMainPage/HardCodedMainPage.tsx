@@ -7,8 +7,6 @@ import { HomepageCard } from './HomepageCard/HomepageCard';
 import PlantCube from './PlantCube';
 import styles from './HardCodedMainPage.module.css';
 import { Euler } from 'three';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 
 type HardCodedMainPageProps = {
 	a: () => void
@@ -35,7 +33,6 @@ const headerCards: HeaderCard[] = [
 export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 	a
 }) => {
-	const [eulerRotation, setEulerRotation] = useState<Euler>(new Euler(0.5, -0.5, 0, 'XYZ'));
 	return <>
 		<Fade>
 			<div className="hcmp-bgdiv">
@@ -54,32 +51,7 @@ export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 						</Col>
 						<Col md={6}>
 							{/** SIDE IMAGE GOES HERE */}
-							<PlantCube className={styles.plantCube} rotation={eulerRotation} />
-							<Form.Label>Euler Y</Form.Label>
-							<Form.Control type="range" onChange={ e => {
-								setEulerRotation(oldRot => {
-									let newRot = oldRot.clone();
-									newRot.y = parseInt(e.currentTarget.value) / 100 * 2 * Math.PI
-									console.log(newRot);
-									return newRot;
-								})
-							}}/>
-							<Button onClick={() => {
-								setEulerRotation(oldRot => {
-									let newRot = oldRot.clone();
-									newRot.y = 0 / 100 * 2 * Math.PI
-									console.log(newRot);
-									return newRot;
-								})
-							}}>0%</Button>
-							<Button onClick={() => {
-								setEulerRotation(oldRot => {
-									let newRot = oldRot.clone();
-									newRot.y = 100 / 100 * 2 * Math.PI
-									console.log(newRot);
-									return newRot;
-								})
-							}}>100%</Button>
+							<PlantCube className={styles.plantCube}/>
 						</Col>
 					</Row>
 				</Grid>
