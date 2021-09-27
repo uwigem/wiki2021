@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 //@ts-ignore
 import Fade from 'react-reveal/Fade';
 import './HardCodedMainPage.css';
@@ -6,7 +6,6 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import { HomepageCard } from './HomepageCard/HomepageCard';
 import PlantCube from './PlantCube';
 import styles from './HardCodedMainPage.module.css';
-import { Euler } from 'three';
 
 type HardCodedMainPageProps = {
 	a: () => void
