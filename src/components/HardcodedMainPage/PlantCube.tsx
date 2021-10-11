@@ -5,7 +5,10 @@ import {
     PerspectiveCamera,
     DirectionalLight,
     Object3D,
-    AxesHelper
+    AxesHelper,
+    DoubleSide,
+    Mesh,
+    Material
 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -14,7 +17,8 @@ export type PlantCubeType = {
     className?: string
 }
 
-const GLTF_FILEPATH = "grassCube.gltf";
+const GLTF_FILEPATH = "Cube_Draft.gltf";
+// const GLTF_FILEPATH = "grassCube.gltf";
 const FOV = 90; // field of view
 const NEAR_CLIP_PLANE = 0.1;
 const FAR_CLIP_PLANE = 1000;
@@ -53,6 +57,9 @@ export default function PlantCube({ className }: PlantCubeType) {
         camera.position.z = 4;
         camera.rotateX(-0.2);
 
+        const renderer = new WebGLRenderer({ canvas: canvasRef.current!, alpha: true });
+        renderer.setSize(width!, height!);
+
         // axis for debugging
         // const axesHelper = new AxesHelper(5);
         // scene.add(axesHelper);
@@ -62,19 +69,29 @@ export default function PlantCube({ className }: PlantCubeType) {
         const loader = new GLTFLoader();
         loader.load(GLTF_FILEPATH, function (gltf) {
             const scale = 1.25;
-            cube = gltf.scene.children[0];
+            console.log(gltf.scene.children);
+            console.log(gltf.scene.children[1]);
+            cube = gltf.scene.children[1];
             cube.scale.set(scale, scale, scale);
             cube.rotateY(0.5);
             cube.position.y += 0.25;
             scene.add(cube);
+
+            gltf.scene.traverse(object3D => {
+                if (object3D instanceof Mesh) {
+                    let material: Material = object3D.material;
+                    material.side = DoubleSide;
+                }
+            })
         });
 
         const light1 = new DirectionalLight( 0xefefff, 1.5 );
         light1.position.set( 1, 1, 1 ).normalize();
         scene.add( light1 );
 
-        const renderer = new WebGLRenderer({ canvas: canvasRef.current!, alpha: true });
-        renderer.setSize(width!, height!);
+        const light2 = new DirectionalLight( 0xefefff, 1.5 );
+        light2.position.set( -1, -1, -1 ).normalize();
+        scene.add( light2 );
 
         // Creates orbit controls, does not need to be stored in variable
         // unless we want to modify it
