@@ -6,6 +6,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import { HomepageCard } from './HomepageCard/HomepageCard';
 import PlantCube from './PlantCube';
 import styles from './HardCodedMainPage.module.css';
+import { Parallax } from 'react-parallax';
 
 type HardCodedMainPageProps = {
 	a: () => void
@@ -68,6 +69,11 @@ export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 					</Row>
 				</Grid>
 			</div>
+			<Parallax strength={500} bgImage="https://lumiere-a.akamaihd.net/v1/images/sa_pixar_virtualbg_coco_16x9_9ccd7110.jpeg">
+				<div className="hcmp-factory">
+					<h2>SOME BIG TEXT HERE</h2>
+				</div>
+			</Parallax>
 			<div className="hcmp-learn-more-wrapper">
 				<Grid>
 					<Row>
