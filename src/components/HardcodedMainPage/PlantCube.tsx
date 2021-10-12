@@ -17,7 +17,7 @@ export type PlantCubeType = {
     className?: string
 }
 
-const GLTF_FILEPATH = "Cube_Draft.gltf";
+const GLTF_FILEPATH = "Cube_Draft.glb";
 // const GLTF_FILEPATH = "grassCube.gltf";
 const FOV = 90; // field of view
 const NEAR_CLIP_PLANE = 0.1;
@@ -76,13 +76,6 @@ export default function PlantCube({ className }: PlantCubeType) {
             cube.rotateY(0.5);
             cube.position.y += 0.25;
             scene.add(cube);
-
-            gltf.scene.traverse(object3D => {
-                if (object3D instanceof Mesh) {
-                    let material: Material = object3D.material;
-                    material.side = DoubleSide;
-                }
-            })
         });
 
         const light1 = new DirectionalLight( 0xefefff, 1.5 );
