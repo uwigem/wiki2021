@@ -6,8 +6,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import { HomepageCard } from './HomepageCard/HomepageCard';
 import PlantCube from './PlantCube';
 import styles from './HardCodedMainPage.module.css';
-import { Euler } from 'three';
-import Form from 'react-bootstrap/Form';
+import { Parallax } from 'react-parallax';
 
 type HardCodedMainPageProps = {
 	a: () => void
@@ -53,16 +52,7 @@ export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 						</Col>
 						<Col md={6}>
 							{/** SIDE IMAGE GOES HERE */}
-							<PlantCube className={styles.plantCube} rotations={eulerRotation}/>
-							<Form.Label>Euler Y</Form.Label>
-							<Form.Control type="range" onChange={ e => {
-								setEulerRotation(oldRot => {
-									let newRot = oldRot.clone();
-									newRot.y = parseInt(e.currentTarget.value) / 100 * 2 * Math.PI
-									console.log(newRot);
-									return newRot;
-								})
-							}}/>
+							<PlantCube className={styles.plantCube}/>
 						</Col>
 					</Row>
 				</Grid>
@@ -80,6 +70,11 @@ export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 					</Row>
 				</Grid>
 			</div>
+			<Parallax strength={500} bgImage="https://lumiere-a.akamaihd.net/v1/images/sa_pixar_virtualbg_coco_16x9_9ccd7110.jpeg">
+				<div className="hcmp-factory">
+					<h2>SOME BIG TEXT HERE</h2>
+				</div>
+			</Parallax>
 			<div className="hcmp-learn-more-wrapper">
 				<Grid>
 					<Row>
