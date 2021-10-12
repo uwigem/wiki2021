@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 //@ts-ignore
 import Fade from 'react-reveal/Fade';
 import './HardCodedMainPage.css';
@@ -33,7 +33,6 @@ const headerCards: HeaderCard[] = [
 export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 	a
 }) => {
-	const [eulerRotation, setEulerRotation] = useState<Euler>(new Euler(0.5, -0.5, 0, 'XYZ'));
 	return <>
 		<Fade>
 			<div className="hcmp-bgdiv">
