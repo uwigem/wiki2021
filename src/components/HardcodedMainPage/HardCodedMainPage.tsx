@@ -1,46 +1,45 @@
 import React from 'react';
 //@ts-ignore
-import Fade from 'react-reveal/Fade';
-import './HardCodedMainPage.css';
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import { HomepageCard } from './HomepageCard/HomepageCard';
+// import Fade from 'react-reveal/Fade';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import PlantCube from './PlantCube';
 import styles from './HardCodedMainPage.module.css';
 import { Parallax } from 'react-parallax';
-import Container from 'react-bootstrap/Container';
 
 type HardCodedMainPageProps = {
 	a: () => void
 }
 
-type HeaderCard = {
-	header: string,
-	image: string,
-	blurb: string,
-	link: string,
-	x?: number,
-	y?: number
-}
+// type HeaderCard = {
+// 	header: string,
+// 	image: string,
+// 	blurb: string,
+// 	link: string,
+// 	x?: number,
+// 	y?: number
+// }
 
-const headerCards: HeaderCard[] = [
-	{
-		header: "Lorem Ipsum",
-		image: "https://2019.igem.org/wiki/images/a/a9/T--Washington--Octet_Sensor_Setup.png",
-		blurb: "Lorem ipsum",
-		link: ""
-	}
-]
+// const headerCards: HeaderCard[] = [
+// 	{
+// 		header: "Lorem Ipsum",
+// 		image: "https://2019.igem.org/wiki/images/a/a9/T--Washington--Octet_Sensor_Setup.png",
+// 		blurb: "Lorem ipsum",
+// 		link: ""
+// 	}
+// ]
 
 export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 	a
 }) => {
 	return <>
-		<Fade>
+		{/* <Fade> */}
 			{/* <div className="hcmp-bgdiv">
 				<div className="hcmp-innerbgdiv"></div>
 			</div> */}
 			<section className={styles.heroContainer}>
-				<Grid className={styles.hero}>
+				<Container className={styles.hero}>
 					<Row>
 						<Col md={5}>
 							<h1>Arcenic Purification</h1>
@@ -51,7 +50,7 @@ export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 							<PlantCube className={styles.plantCube}/>
 						</Col>
 					</Row>
-				</Grid>
+				</Container>
 				<div className={styles.scrollDown}>
 					<p>Scroll down for more info</p>
 					<p>VVV</p>
@@ -61,7 +60,7 @@ export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 				<Container>
 					<h1>Problem Context</h1>
 					<Parallax strength={500} bgImage="https://lumiere-a.akamaihd.net/v1/images/sa_pixar_virtualbg_coco_16x9_9ccd7110.jpeg">
-						<div className="hcmp-factory">
+						<div className={styles.problemContextFactory}>
 							<h2>SOME BIG TEXT HERE</h2>
 						</div>
 					</Parallax>
@@ -79,7 +78,7 @@ export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 						LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE.
 						LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE.
 					</p>
-					<Grid className={styles.problemContextStatistics}>
+					<Container className={styles.problemContextStatistics}>
 						<Row className={"gx-5"}>
 							<Col md={3}>
 								<div>
@@ -97,7 +96,7 @@ export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 								</div>
 							</Col>
 						</Row>
-					</Grid>
+					</Container>
 					<p>
 						LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE.
 						LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE.
@@ -117,12 +116,12 @@ export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 			<section className={styles.ourSolution}>
 				<Container>
 					<h1>Our Solution</h1>
-					<Grid className={styles.ourSolutionGrid}>
+					<Container className={styles.ourSolutionGrid}>
 						<Row className={"gx-5"}>
 							<Col md={6}><p>IMAGE 1</p></Col>
 							<Col md={6}><p>IMAGE 2</p></Col>
 						</Row>
-					</Grid>
+					</Container>
 					<p>
 						LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE.
 						LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE. LOTS OF TEXT HERE.
@@ -139,6 +138,6 @@ export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 					</p>
 				</Container>
 			</section>
-		</Fade>
+		{/* </Fade> */}
 	</>
 }
