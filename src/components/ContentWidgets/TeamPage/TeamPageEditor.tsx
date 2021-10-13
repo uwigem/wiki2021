@@ -81,7 +81,7 @@ export const TeamPageEditor: React.FC<WidgetEditorProps> = ({
             return <div key={'sect' + sectIndex} style={{ marginBottom: 20 }}>
                 <div style={{ margin: 'auto', width: '100%', textAlign: 'center', fontSize: 50 }}>{sect}</div>
                 <Grid fluid style={{ padding: 0, margin: 0 }}>
-                    
+
                     <Row style={{ padding: 0, margin: 0 }} center="xs">
                         {data && data.map((d, i) => {
                             let filter;
@@ -220,7 +220,7 @@ export const TeamPageEditor: React.FC<WidgetEditorProps> = ({
                     </Row>
                 </Grid>
             </div> */}
-        })}
+        {/* })} */}
         {/* <h3>Person to Edit</h3>
         <div>
             <Grid>

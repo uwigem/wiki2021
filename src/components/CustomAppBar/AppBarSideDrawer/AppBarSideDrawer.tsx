@@ -9,7 +9,7 @@ type AppBarSideDrawerProps = {
 	a: () => void
 }
 
-// TODO: 
+// TODO:
 export const AppBarSideDrawer: React.FC<AppBarSideDrawerProps> = ({
 	name,
 	pageTitle,
@@ -23,6 +23,7 @@ export const AppBarSideDrawer: React.FC<AppBarSideDrawerProps> = ({
 			onClick={() => setDrawerState(!drawerState)}
 		><MenuIcon /></IconButton>
 		<Sidebar
+		// @ts-ignore
 			toggleDrawer={() => setDrawerState(!drawerState)}
 			drawerOpen={drawerState}
 			side="right"
