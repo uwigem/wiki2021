@@ -4,7 +4,6 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import PlantCube from './PlantCube';
 import styles from './HardCodedMainPage.module.css';
 import { Parallax } from 'react-parallax';
 
@@ -47,7 +46,7 @@ export const HardCodedMainPage: React.FC<HardCodedMainPageProps> = ({
 						</Col>
 						<Col md={7}>
 							{/** SIDE IMAGE GOES HERE */}
-							<PlantCube className={styles.plantCube}/>
+							<iframe className={styles.plantCube} src="https://2021.igem.org/Team:Washington/PlantCube" frameBorder="0"></iframe>
 						</Col>
 					</Row>
 				</Container>
