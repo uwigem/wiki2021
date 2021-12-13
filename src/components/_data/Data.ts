@@ -312,9 +312,10 @@ const teamData: TeamData = [
         NAME: "Jaden Stetler",
         ROLE: "Web Development, Human Practices",
         PICTURE: "https://2021.igem.org/wiki/images/d/d9/T--Washington--HLogo1.png",
-        FILTER: "Web Development, Human Practice",
+        FILTER: "Web Development, Human Practices",
         LINKEDIN: "https://www.linkedin.com/in/jadenstetler/",
-        BIO: "I am a Computer Science major at UW involved in Web Development and previously involved with Human Practices."
+				GITHUB: "https://github.com/jadens3",
+        BIO: "Jaden is a Computer Science major at UW involved in Web Development and previously involved with Human Practices."
     },
     {
         NAME: "Jennifer Tao",
